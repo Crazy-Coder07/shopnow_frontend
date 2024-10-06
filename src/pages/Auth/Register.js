@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/AuthStyles.css";
 import { ToastContainer,toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+const apiUrl = process.env.REACT_APP_API;
+
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -19,7 +21,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/api/v1/auth/register", {
+      const res = await axios.post(`${apiUrl}/api/v1/auth/register`, {
         name,
         email,
         password,

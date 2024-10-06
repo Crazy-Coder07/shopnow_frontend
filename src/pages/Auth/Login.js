@@ -6,6 +6,7 @@ import "../../styles/AuthStyles.css";
 import {useAuth} from "../../context/Auth";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+const apiUrl = process.env.REACT_APP_API;
 
 
 const Login = () => {
@@ -21,11 +22,12 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/api/v1/auth/login", {
+      const res = await axios.post(`${apiUrl}/api/v1/auth/login`, {
         email,
-        password,
+        password
       });
-      if (res && res.data.success) {
+      console.log(res);
+      if (res && res.data) {
         toast.success("Login Success");
         setAuth({
           ...auth,

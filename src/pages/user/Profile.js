@@ -4,6 +4,7 @@ import Layout from "./../../components/Layout/Layout";
 import { useAuth } from "../../context/Auth";
 import toast from "react-hot-toast";
 import axios from "axios";
+const apiUrl = process.env.REACT_APP_API;
 
 
 
@@ -29,7 +30,7 @@ const Profile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.put("/api/v1/auth/profile", {
+      const { data } = await axios.put(`${apiUrl}/api/v1/auth/profile`, {
         name,
         email,
         password,
@@ -51,6 +52,7 @@ const Profile = () => {
       toast.error("Something went wrong");
     }
   };
+  
   return (
     <Layout title={"Your Profile"}>
       <div className="container-fluid m-3 p-3 dashboard">

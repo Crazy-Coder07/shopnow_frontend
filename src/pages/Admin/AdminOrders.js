@@ -7,6 +7,8 @@ import { useAuth } from "../../context/Auth";
 import moment from "moment";
 import { Select } from "antd";
 const { Option } = Select;
+const apiUrl = process.env.REACT_APP_API;
+
 
 const AdminOrders = () => {
   const [status, setStatus] = useState([
@@ -21,7 +23,7 @@ const AdminOrders = () => {
   const [auth, setAuth] = useAuth();
   const getOrders = async () => {
     try {
-      const { data } = await axios.get("/api/v1/auth/all-orders");
+      const { data } = await axios.get(`${apiUrl}/api/v1/auth/all-orders`);
       setOrders(data);
     } catch (error) {
       console.log(error);
@@ -34,7 +36,7 @@ const AdminOrders = () => {
 
   const handleChange = async (orderId, value) => {
     try {
-      const { data } = await axios.put(`/api/v1/auth/order-status/${orderId}`, {
+      const { data } = await axios.put(`${apiUrl}/api/v1/auth/order-status/${orderId}`, {
         status: value,
       });
       getOrders();
@@ -92,7 +94,7 @@ const AdminOrders = () => {
                     <div className="row mb-2 p-3 card flex-row" key={p._id}>
                       <div className="col-md-4">
                         <img
-                          src={`/api/v1/product/product-photo/${p._id}`}
+                          src={`${apiUrl}/api/v1/product/product-photo/${p._id}`}
                           className="card-img"
                           alt={p.name}
                         />

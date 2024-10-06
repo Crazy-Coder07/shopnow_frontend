@@ -4,13 +4,15 @@ import Layout from "./../../components/Layout/Layout";
 import axios from "axios";
 import { useAuth } from "../../context/Auth";
 import moment from "moment";
+const apiUrl = process.env.REACT_APP_API;
+
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [auth, setAuth] = useAuth();
   const getOrders = async () => {
     try {
-      const { data } = await axios.get("/api/v1/auth/orders");
+      const { data } = await axios.get(`${apiUrl}/api/v1/auth/orders`);
       setOrders(data);
     } catch (error) {
       console.log(error);
@@ -59,7 +61,7 @@ const Orders = () => {
                       <div className="row mb-2 p-3 card flex-row" key={p._id}>
                         <div className="col-md-4">
                           <img
-                            src={`/api/v1/product/product-photo/${p._id}`}
+                            src={`${apiUrl}/api/v1/product/product-photo/${p._id}`}
                             className="card-img"
                             alt={p.name}
                             width="100px"

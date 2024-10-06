@@ -10,6 +10,9 @@ import img1 from "../images/h1.jpeg";
 import "../styles/Homepage.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+const apiUrl = process.env.REACT_APP_API;
+
+
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -26,7 +29,7 @@ const HomePage = () => {
   // get all cat
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("/api/v1/category/get-category");
+      const { data } = await axios.get(`${apiUrl}/api/v1/category/get-category`);
       console.log(data);
       if (data?.success) {
         setCategories(data?.category);
@@ -45,7 +48,7 @@ const HomePage = () => {
   const getAllProducts = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(`/api/v1/product/product-list/${page}`);
+      const { data } = await axios.get(`${apiUrl}/api/v1/product/product-list/${page}`);
       setLoading(false);
       setProducts(data.product);
     } catch (error) {
@@ -57,7 +60,7 @@ const HomePage = () => {
   // getTotal Count
   const getTotal = async () => {
     try {
-      const { data } = await axios.get("/api/v1/product/product-count");
+      const { data } = await axios.get(`${apiUrl}/api/v1/product/product-count`);
       setTotal(data?.total);
     } catch (error) {
       console.log(error);
@@ -73,7 +76,7 @@ const HomePage = () => {
   const loadMore = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(`/api/v1/product/product-list/${page}`);
+      const { data } = await axios.get(`${apiUrl}/api/v1/product/product-list/${page}`);
       setLoading(false);
       setProducts([...products, ...data?.product]);
     } catch (error) {
@@ -112,7 +115,7 @@ const HomePage = () => {
   // get filtered product
   const filterProduct = async () => {
     try {
-      const { data } = await axios.post("/api/v1/product/product-filters", {
+      const { data } = await axios.post(`${apiUrl}/api/v1/product/product-filters`, {
         checked,
         radio,
       });
@@ -175,7 +178,7 @@ const HomePage = () => {
               <div className="card m-2" key={p._id}>
                 <div width="290px" height="260px">
                   <img
-                    src={`/api/v1/product/product-photo/${p._id}`}
+                    src={`${apiUrl}/api/v1/product/product-photo/${p._id}`}
                     className="card-img-top p-0"
                     alt={p.name}
                   />

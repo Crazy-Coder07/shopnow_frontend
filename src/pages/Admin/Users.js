@@ -3,6 +3,8 @@ import Layout from '../../components/Layout/Layout';
 import AdminMenu from '../../components/Layout/AdminMenu';
 import axios from 'axios';
 import { useAuth } from '../../context/Auth';
+const apiUrl = process.env.REACT_APP_API;
+
 
 const Users = () => {
   const [allUser, setAllUser] = useState([]);
@@ -10,7 +12,7 @@ const Users = () => {
 
   const getUsers = async (_id, value) => {
     try {
-      const { data } = await axios.get(`/api/v1/auth/all-users`, {
+      const { data } = await axios.get(`${apiUrl}/api/v1/auth/all-users`, {
         params: {
           status: value,
         },
